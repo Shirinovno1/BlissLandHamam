@@ -243,7 +243,10 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -253,16 +256,23 @@
             overflow: hidden;
         }
         
-        /* Abstract Gold Glow */
+        /* Abstract Gold Glow - Adjusted for image background */
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, rgba(0,0,0,0.4) 70%);
             pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                background-attachment: scroll; /* Better performance on mobile */
+                background-position: center top;
+            }
         }
 
         .hero-content {
@@ -870,47 +880,114 @@
             // Menu Data
             const menuData = {
                 "Soyuq qəlyanaltılar": [
-                    { name: "Badımcan ruleti", price: "4.5 ₼", desc: "Qızardılmış badımcan, qoz içi, göyərti" },
-                    { name: "Toyuq əzmə", price: "5 ₼", desc: "Toyuq filesi, mayonez, qoz" },
-                    { name: "Göyərti assorti", price: "5 ₼", desc: "Mövsümi təzə göyərtilər" },
-                    { name: "Tərəvəz buketi", price: "6 ₼", desc: "Xiyar, pomidor, bibər, pendir" },
-                    { name: "Turşu assorti", price: "6 ₼", desc: "Ev üsulu turşular" },
-                    { name: "Pendir assorti", price: "4–6 ₼", desc: "Yerli və xarici pendirlər" },
-                    { name: "Zeytun", price: "3 ₼", desc: "Qara və yaşıl zeytun" },
-                    { name: "Badımcan ləvəngi", price: "5 ₼", desc: "" },
-                    { name: "Paşte", price: "6 ₼", desc: "" },
-                    { name: "Süzmə", price: "2 ₼", desc: "" }
+                    { name: "Badımcan ruleti", price: "4.5 ₼", desc: "Tərkibi: qızardılmış badımcan dilimləri, qoz içi, soğan, sarımsaq, göyərti, sous." },
+                    { name: "Toyuq əzmə", price: "5 ₼", desc: "Tərkibi: bişmiş toyuq əti, mayonez və ya qatıq, xiyar turşusu, göyərti, ədviyyat." },
+                    { name: "Göyərti assorti", price: "5 ₼", desc: "Tərkibi: şüyüd, cəfəri, keşniş, reyhan, yaşıl soğan və digər təzə göyərti." },
+                    { name: "Tərəvəz buketi", price: "6 ₼", desc: "Tərkibi: təzə xiyar, pomidor, bibər, turp, kahı, göyərti." },
+                    { name: "Turşu assorti", price: "6 ₼", desc: "Tərkibi: xiyar, pomidor, kələm, bibər və digər tərəvəz turşuları." },
+                    { name: "Pendir assorti", price: "4–6 ₼", desc: "Tərkibi: müxtəlif yerli pendirlər (ağ pendir, saçaq pendir və s.), zeytun, göyərti." },
+                    { name: "Zeytun", price: "3 ₼", desc: "Tərkibi: yaşıl və/və ya qara zeytun, limon, zeytun yağı." },
+                    { name: "Badımcan lavangi", price: "5 ₼", desc: "Tərkibi: sobada bişmiş badımcan, qoz içi, soğan, alça və ya nar sousu, göyərti." },
+                    { name: "Paşte", price: "6 ₼", desc: "Tərkibi: toyuq və ya mal ciyəri paştesi, kərə yağı, ədviyyat, yanında çörək dilimləri." },
+                    { name: "Qatıq", price: "1.5 ₼", desc: "Tərkibi: təzə qatıq, duz, istəyə görə sarımsaq və göyərti." },
+                    { name: "Saçaq pendir", price: "2 ₼", desc: "Tərkibi: saçaq pendir, zeytun və ya təzə göyərti." },
+                    { name: "Açika", price: "2 ₼", desc: "Tərkibi: acı bibər, sarımsaq, duz, göyərti, ədviyyat qarışığı." },
+                    { name: "Ağ pendir", price: "3–4 ₼", desc: "Tərkibi: duzlu ağ pendir, zeytun, göyərti." },
+                    { name: "Süzmə", price: "2 ₼", desc: "Tərkibi: süzmə qatıq, duz, nanə və ya digər göyərti." }
                 ],
                 "İsti qəlyanaltılar": [
-                    { name: "Blinçik (ət ilə)", price: "1.5 ₼", desc: "1 ədəd" },
-                    { name: "Pomidor yumurta", price: "5 ₼", desc: "" },
-                    { name: "Krevetka tempura", price: "12 ₼", desc: "" },
-                    { name: "Edamame", price: "7 ₼", desc: "" },
-                    { name: "Toyuq qanadları BBQ", price: "8 ₼", desc: "" },
-                    { name: "Nagets", price: "7 ₼", desc: "" }
+                    { name: "Blinçik ət", price: "1.5 ₼", desc: "Tərkibi: nazik krep xəmiri, qiymə ət, soğan, ədviyyat, xama və ya sous." },
+                    { name: "Pomidor yumurta", price: "5 ₼", desc: "Tərkibi: pomidor, yumurta, soğan, bitki yağı və ya kərə yağı, ədviyyat." },
+                    { name: "Krevetka tempura", price: "12 ₼", desc: "Tərkibi: krevet, tempura xəmiri (un, su, yumurta), dərin yağda qızardılır, sous." },
+                    { name: "Edamame", price: "7 ₼", desc: "Tərkibi: qabıqlı yaşıl soya paxlası, iri duz." },
+                    { name: "Toyuq qanadları BBQ sous", price: "8 ₼", desc: "Tərkibi: marinadlı toyuq qanadları, BBQ sousu, kərə yağı, kartof fri." },
+                    { name: "Nagets", price: "7 ₼", desc: "Tərkibi: toyuq filesi, un, yumurta, suxarı, qızardılmış nagets, kartof fri, sous." }
                 ],
                 "Kabablar": [
-                    { name: "Tikə kabab", price: "8 ₼", desc: "Quzu əti" },
-                    { name: "Lülə kabab", price: "8 ₼", desc: "Quzu əti" },
-                    { name: "Toyuq lülə", price: "6 ₼", desc: "" },
-                    { name: "Antrikot", price: "15 ₼", desc: "" },
-                    { name: "Toyuq kababı", price: "6 ₼", desc: "" },
-                    { name: "Dana basdırması", price: "10 ₼", desc: "" },
-                    { name: "Hinduşka kababı", price: "11 ₼", desc: "" },
-                    { name: "Kartof lülə", price: "4 ₼", desc: "" },
-                    { name: "Xaçapuri (şampurda)", price: "10 ₼", desc: "" }
+                    { name: "Tika kabab", price: "8 ₼", desc: "Tərkibi: şişdə bişmiş quzu və ya mal ətindən tikələr, soğan, lavaş, qril tərəvəzlər." },
+                    { name: "Qoyun lülə kababı", price: "8 ₼", desc: "Tərkibi: qiymə qoyun əti, quyruq yağı, soğan, ədviyyat, lavaş, soğan salatı." },
+                    { name: "Toyuq lülə", price: "6 ₼", desc: "Tərkibi: qiymə toyuq filesi, soğan, ədviyyat, lavaş, göyərti." },
+                    { name: "Antrikot", price: "15 ₼", desc: "Tərkibi: manqalda bişmiş mal antrikotu, soğan, lavaş, qril tərəvəzlər." },
+                    { name: "Toyuq kababı", price: "6 ₼", desc: "Tərkibi: marinadlı toyuq filesi şişdə, lavaş, göyərti, tərəvəz." },
+                    { name: "Dana basdırması", price: "10 ₼", desc: "Tərkibi: xüsusi marinadlı dana əti, manqalda bişmiş, lavaş və soğanla." },
+                    { name: "Sümüksüz toyuq", price: "7 ₼", desc: "Tərkibi: sümüksüz toyuq budu və ya filesi, ədviyyatlı marinad, qril tərəvəz və lavaş." },
+                    { name: "Hinduşka kabab", price: "11 ₼", desc: "Tərkibi: hinduşka filesi şişdə, limonlu və ədviyyatlı marinad, lavaş və göyərti." },
+                    { name: "Çolpa setka", price: "12 ₼", desc: "Tərkibi: bütöv çolpa toyuq, setkada ızgarada bişmiş, yanında kartof və tərəvəz." },
+                    { name: "Kartof külləmə", price: "12 ₼", desc: "Tərkibi: sobada bişmiş iri kartof, içi kərə yağı, pendir, göyərti ilə doldurulmuş." },
+                    { name: "Kartof quyruq", price: "5 ₼", desc: "Tərkibi: bişmiş və ya qızardılmış kartof, quyruq yağı, soğan, ədviyyat." },
+                    { name: "Kartof lülə", price: "4 ₼", desc: "Tərkibi: əzilmiş kartof kütləsi, yumurta və unla lülə formasında kabab." },
+                    { name: "Xaçapuri kababı", price: "10 ₼", desc: "Tərkibi: pendirli xəmirdən hazırlanan xaçapuri tipli kabab, pendir içlik, yağ." },
+                    { name: "Tərəvəz kababı", price: "1 ₼", desc: "Tərkibi: pomidor, badımcan, acı bibər şişdə manqal." }
+                ],
+                "Şorba": [
+                    { name: "Düşbərə şorbası", price: "5 ₼", desc: "Tərkibi: xəmirdə qiymə ət (düşbərə), ət suyu, göyərti, sirkə-sarımsaq." },
+                    { name: "Göy supu", price: "5 ₼", desc: "Tərkibi: müxtəlif göyərti, düyü və ya irmik, yumurta, qatıq və ya ət suyu." },
+                    { name: "Lobya supu", price: "4 ₼", desc: "Tərkibi: quru lobya, soğan, kök, pomidor pastası, ədviyyat." },
+                    { name: "Dovğa", price: "4 ₼", desc: "Tərkibi: qatıq, düyü, noxud, şüyüd, cəfəri, nanə." }
+                ],
+                "Salatlar": [
+                    { name: "Çoban salatı", price: "5 ₼", desc: "Tərkibi: xiyar, pomidor, göyərti, qırmızı soğan, zeytun yağı." },
+                    { name: "Manqal salatı", price: "5 ₼", desc: "Tərkibi: manqalda bişmiş badımcan, pomidor, bibər, soğan, göyərti." },
+                    { name: "Təzə Gürcü salatı", price: "6 ₼", desc: "Tərkibi: xiyar, pomidor, qoz içi, göyərti, sirkə və ya nar sousu." },
+                    { name: "Sezar salatı toyuq ilə", price: "8 ₼", desc: "Tərkibi: toyuq filesi, kahı, kruton, parmesan pendiri, Sezar sousu." },
+                    { name: "Sezar salatı krevetka ilə", price: "11 ₼", desc: "Tərkibi: krevetka, kahı, kruton, parmesan pendiri, Sezar sousu." },
+                    { name: "Paytaxt salatı", price: "4 ₼", desc: "Tərkibi: kartof, kök, noxud, kolbasa və ya toyuq, yumurta, xiyar turşusu, mayonez." },
+                    { name: "Tuna salatı", price: "11 ₼", desc: "Tərkibi: tuna konservi, kahı, qarğıdalı, pomidor, xiyar, sous." },
+                    { name: "Cəfəri salatı", price: "4 ₼", desc: "Tərkibi: cəfəri, pomidor, soğan, limon suyu, zeytun yağı." },
+                    { name: "Mimoza salatı", price: "4 ₼", desc: "Tərkibi: balıq konservi, kartof, kök, yumurta, mayonez qatları." },
+                    { name: "Pomidorlu vişnə salatı", price: "6 ₼", desc: "Tərkibi: təzə pomidor, vişnə və ya vişnə turşusu, göyərti, sous." },
+                    { name: "Avacado Salmon salatı", price: "14 ₼", desc: "Tərkibi: hisə verilmiş qızıl balıq, avokado, krevetka, rukola və digər göyərti, limonlu sous." }
+                ],
+                "Rus stolu": [
+                    { name: "Sosiska (yerli halal)", price: "4 ₼", desc: "Tərkibi: halal sosiska, sous, çörək və ya qarnitür." },
+                    { name: "Sosiska (İveriya gürcü)", price: "5 ₼", desc: "Tərkibi: gürcü tipli sosiska, sous, çörək." },
+                    { name: "Sosiska (maloçnu)", price: "6 ₼", desc: "Tərkibi: südlü sosiska, sous, çörək." },
+                    { name: "Sosiska (qışqavoy)", price: "6 ₼", desc: "Tərkibi: hisə verilmiş sosiska, sous, çörək." },
+                    { name: "Sardelka (Gürcü)", price: "6 ₼", desc: "Tərkibi: iri gürcü sardelkası, sous, çörək." },
+                    { name: "Sardelka (Rus)", price: "6 ₼", desc: "Tərkibi: klassik rus sardelkası, sous, çörək." },
+                    { name: "Krakov (tamat sousu ilə)", price: "7 ₼", desc: "Tərkibi: Krakov kolbasası dilimləri, pomidor sousu, soğan." },
+                    { name: "Suletqa balıq (Ruski more)", price: "5 ₼", desc: "Tərkibi: marinadlı balıq fileləri, soğan, yağlı sous." },
+                    { name: "Soyutma kartof", price: "2 ₼", desc: "Tərkibi: qaynadılmış kartof, kərə yağı və ya göyərti." },
+                    { name: "Soyutma yumurta", price: "2 ₼", desc: "Tərkibi: bərk bişmiş yumurta, duz, ədviyyat." },
+                    { name: "Kolbasa assorti", price: "8 ₼", desc: "Tərkibi: müxtəlif kolbasa və sosiska dilimləri, pendir və ya zeytun." },
+                    { name: "Yağ kərə yağı", price: "2 ₼", desc: "Tərkibi: kərə yağı porsiyası, çörəklə birlikdə." }
                 ],
                 "Sac yeməkləri": [
-                    { name: "Çolpa sacı", price: "18 ₼", desc: "" },
-                    { name: "Quzu sacı", price: "20 ₼", desc: "" },
-                    { name: "Can əti sacı", price: "25 ₼", desc: "" },
-                    { name: "Qarışıq sac", price: "30 ₼", desc: "" }
+                    { name: "Çolpa sac", price: "18 ₼", desc: "Tərkibi: sacda bişmiş çolpa toyuq, kartof, pomidor, bibər, soğan." },
+                    { name: "Quzu sac", price: "20 ₼", desc: "Tərkibi: quzu əti, kartof, soğan, bibər, pomidor, sacda bişirilmiş." },
+                    { name: "Can əti sac", price: "25 ₼", desc: "Tərkibi: mal can əti, göbələk və ya kartof, soğan, bibər, sacda." },
+                    { name: "Qarışıq sac", price: "30 ₼", desc: "Tərkibi: quzu, mal və toyuq ətinin qarışığı, kartof, tərəvəz, sacda." }
                 ],
-                "Şorbalar": [
-                    { name: "Düşbərə", price: "5 ₼", desc: "" },
-                    { name: "Göyərti şorbası", price: "5 ₼", desc: "" },
-                    { name: "Lobya şorbası", price: "4 ₼", desc: "" },
-                    { name: "Dovğa", price: "4 ₼", desc: "" }
+                "Balıq yeməkləri": [
+                    { name: "Berj", price: "18 ₼", desc: "Tərkibi: bütöv və ya iri tikə ağ ət balıq, ızgara, limon, soğan, qarnitür." },
+                    { name: "Forel", price: "10 ₼", desc: "Tərkibi: forel balığı ızgarada və ya sacda, limon və göyərti ilə." },
+                    { name: "Qızıl balıq setka", price: "15 ₼", desc: "Tərkibi: qızıl balıq fileləri setkada ızgarada, limonlu sous." }
+                ],
+                "Milli və Avropa yeməkləri": [
+                    { name: "Çoban qovurma", price: "12 ₼", desc: "Tərkibi: quzu əti, soğan, pomidor, bibər, tavada və ya qazanda qovrulmuş." },
+                    { name: "Koftə beçə", price: "12 ₼", desc: "Tərkibi: qiymə ət kotleti, düyü və ya kartof qarniri, pomidor sousu." },
+                    { name: "Çıxmırtı", price: "14 ₼", desc: "Tərkibi: soğanla qovrulmuş ət və yumurta, ədviyyat." },
+                    { name: "Quzu nar qovurma", price: "20 ₼", desc: "Tərkibi: quzu əti, soğan, nar dənəsi və narşərab sousu." },
+                    { name: "Can əti nar qovurma", price: "18 ₼", desc: "Tərkibi: mal can əti, soğan, narşərablı sous." },
+                    { name: "Qovurma quzu əti", price: "13 ₼", desc: "Tərkibi: quzu əti tikələri, soğan, ədviyyat, kərə yağı." },
+                    { name: "Qovurma can əti", price: "16 ₼", desc: "Tərkibi: mal can əti, soğan, ədviyyat, kərə yağı." },
+                    { name: "Ev sayağı tyuqonka", price: "6 ₼", desc: "Tərkibi: kartof, toyuq və ya kolbasa parçaları, pomidor sousu ilə ev üsulu yemək." },
+                    { name: "Ət langet", price: "10 ₼", desc: "Tərkibi: nazik döyülmüş mal filesi, tavada qızardılmış, qarnir ilə." },
+                    { name: "Toyuq langet", price: "7 ₼", desc: "Tərkibi: toyuq filesi langet, panirlənmiş və qızardılmış, qarnir ilə." },
+                    { name: "Quzu qolu lavangi", price: "40 ₼", desc: "Tərkibi: quzu qolu, qozlu lavangi içliyi ilə doldurulmuş, sobada bişmiş." },
+                    { name: "Ət smit", price: "40 ₼", desc: "Tərkibi: mal ətindən steyk və ya kotlet, sous və qarnir ilə." },
+                    { name: "Dopu can əti qaymaqlı", price: "35 ₼", desc: "Tərkibi: mal can əti tikələri, qaymaqlı və göbələkli sousda bişmiş." },
+                    { name: "Dopu quzu əti", price: "24 ₼", desc: "Tərkibi: quzu əti, pomidor və soğanla qazanda bişirilmiş." },
+                    { name: "Xan çörək", price: "18 ₼", desc: "Tərkibi: lavaş içində düyü, ət, şabalıd və quru meyvələrdən ibarət plov tipli yemək." },
+                    { name: "Köpüklü çolpa", price: "20 ₼", desc: "Tərkibi: bütöv çolpa toyuq, xama və ya sousla sobalanmış, üzəri qızarmış." },
+                    { name: "Sırali dana qabırğası", price: "10 ₼", desc: "Tərkibi: marinadlı dana qabırğası, ızgarada və ya sobada bişmiş." },
+                    { name: "Maça şabalıdı", price: "16 ₼", desc: "Tərkibi: ət və şabalıd ilə hazırlanan isti yemək (güveç tipli).." },
+                    { name: "Çolpa tabaka", price: "12 ₼", desc: "Tərkibi: açılıb presdə qızardılmış çolpa toyuq, sarımsaq və ədviyyatla." },
+                    { name: "Toyuq file göbələk sous", price: "14 ₼", desc: "Tərkibi: toyuq filesi, qaymaqlı göbələk sousu, qarnir." },
+                    { name: "Ət Stroganoff", price: "11 ₼", desc: "Tərkibi: nazik doğranmış mal əti, göbələk, qaymaqlı sous, kartof püresi və ya qarnir ilə." },
+                    { name: "Toyuq Stroganoff", price: "17 ₼", desc: "Tərkibi: toyuq filesi ilə hazırlanan stroqanoff, qaymaqlı göbələk sousu, qarnir." },
+                    { name: "Toyuq broyler tabaka", price: "5 ₼", desc: "Tərkibi: kiçik broyler toyuq, tabaka üsulu ilə qızardılmış, sarımsaq və ədviyyatla." },
+                    { name: "Kükü", price: "5 ₼", desc: "Tərkibi: yumurta, göyərti assortisi, ədviyyat, tavada bişmiş kükü." }
                 ]
             };
 
